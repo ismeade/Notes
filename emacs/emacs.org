@@ -1,0 +1,82 @@
+#+TITLE: emacs笔记
+#+AUTHOR: liyang
+#+STARTUP: indent logdone
+#+OPTIONS: ^:{} toc:t H:5 num:0 todo:nil
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://samee-static.oss-cn-zhangjiakou.aliyuncs.com/css/YetAnotherGithub.css" />
+
+* basic                                                                :基础:
+** 目录
+- 打开/创建 SPC f d
+- 删除 D
+** 文件
+- 打开/创建 SPC f .
+- 当前目录 SPC f /
+- 当前文职 SPC f f
+- 删除 D
+
+
+* org-mode
+
+** 头                                                                   :头:
+*** STARTUP indent 自动缩进    
+*** STARTUP logdone 切换todo->done时自动加上时间
+
+** 标题                                                               :标题:
+*** 升降级 M+left/right
+*** 调整位置（平级） M+up/down
+
+** 时间                                                               :时间:
+*** 添加时间 C-c .
+*** deadline C-c C-d
+
+** 标签                                                               :标签:
+*** 添加标签 C-c C-q
+*** 搜索标签
+- C-c \
+- SPC o a m
+
+** 窗口                                                               :窗口:
+*** 水平增加新窗口 SPC w v
+*** 关闭当前窗口 SPC w q
+*** 最大化当前窗口 SPC w |
+*** 平均窗口大小 SPC w =
+
+** agenda                                                       :agenda:GTD:
+*** 查看todo列表
+- SPC o a a t
+- SPC o a t
+*** 查看日历列表 SPC o a a a
+*** 退出 q
+
+*** 快速添加todo/notes SPC X
+
+** 连接                                                               :连接:
+*** 新建连接 C-c C-l
+
+** 字体                                                             :字体:
+*粗体*
+/斜体/
++删除线+
+_下划线_
+下标： H_2 O
+上标： E=mc^2
+等宽字：  =git=  或者 ～git～
+
+** 导出
+- C-c C-e
+
+** Golang                                                               :Go:
+*** import C-c C-a                                            :import:导入:
+
+* dired                                                                :Dird:
+- 打开 SPC o -
+** 创建
+*** 目录 +
+
+** 删除
+使用d标记要删除的文件或文件夹，按x执行删除,按u取消
+
+* treemac
+- SPC o p
+** 关闭 q
