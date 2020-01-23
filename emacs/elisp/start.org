@@ -1,0 +1,146 @@
+#+TITLE: start
+#+AUTHOR: liyang
+#+STARTUP: indent logdone
+#+OPTIONS: ^:{} toc:t H:5 num:0 todo:nil
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://samee-static.oss-cn-zhangjiakou.aliyuncs.com/css/YetAnotherGithub.css" />
+
+
+#+BEGIN_SRC emacs-lisp
+(+ 2 2)
+
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+#+BEGIN_SRC emacs-lisp
+(+ 2 (+ 1 1))
+
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+#+BEGIN_SRC emacs-lisp
+(+ 3 (+ 1 2))
+
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+#+BEGIN_SRC emacs-lisp
+(setq my-name "liyang")
+(insert "Hello, I am " my-name)
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp
+(defun hello ()
+  (insert "Hello, I am " my-name))
+(hello)
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp
+(defun hello (name)
+  (insert "Hello, I am " name))
+(hello "you")
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp
+(switch-to-buffer-other-window "*test*")
+
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *test*>
+
+#+BEGIN_SRC emacs-lisp
+(progn
+  (switch-to-buffer-other-window "*test*") ;; 打开新buffer
+  (erase-buffer) ;; 先清空原有的内容
+  (hello "you") ;; 运行hellp函数
+  (other-window 1) ;; 鼠标焦点移动回1
+  )
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(format "Hello %s!\n" "visitor")
+
+#+END_SRC
+
+#+RESULTS:
+: Hello visitor!
+
+#+BEGIN_SRC emacs-lisp
+(defun hello (name)
+  (insert (format "Hello %s!\n" name)))
+
+(hello "you")
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp
+(defun greeting (name)
+  (let ((your-name "liyang"))
+    (insert (format "Hello %s!\n\nI am %s."
+                    name       ; the argument of the function
+                    your-name  ; the let-bound variable "Bastien"
+                    ))))
+
+(greeting "you")
+
+#+END_SRC
+
+#+RESULTS:
+: greeting
+
+#+BEGIN_SRC emacs-lisp
+(defun create()
+  (insert "#+BEGIN_SRC emacs-lisp\n\n#+END_SRC"))
+
+(create)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(read-from-minibuffer "Enter your name: ")
+
+#+END_SRC
+
+#+RESULTS:
+: liyang
+
+#+BEGIN_SRC emacs-lisp
+(defun greeting ()
+  (let ((your-name (read-from-minibuffer "Enter your name: ")))
+    (insert (format "Hello!\n\nI am %s" your-name))))
+
+(greeting)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq list-of-names '("Sasrah" "Chloe" "Mathilde"))
+
+(car list-of-names)
+(cdr list-of-names)
+
+(push "Stephanie" list-of-names)
+
+(mapcar 'hello list-of-names)
+#+END_SRC
+
+#+RESULTS:
+| Stephanie | Sasrah | Chloe | Mathilde |

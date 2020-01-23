@@ -14,7 +14,9 @@
 - 当前目录 SPC f /
 - 当前文职 SPC f f
 - 删除 D
-
+** 缓冲区
+- 缓冲区列表 SPC b b
+- 上一个缓冲区 SPC b [
 
 * org-mode
 
@@ -54,7 +56,7 @@
 ** 连接                                                               :连接:
 *** 新建连接 C-c C-l
 
-** 字体                                                             :字体:
+** 字体                                                               :字体:
 *粗体*
 /斜体/
 +删除线+
@@ -69,6 +71,10 @@ _下划线_
 ** Golang                                                               :Go:
 *** import C-c C-a                                            :import:导入:
 
+** 代码块
+快速生成 <s TAB
+显示运行结果 在代码块中 C-c C-c
+
 * dired                                                                :Dird:
 - 打开 SPC o -
 ** 创建
@@ -80,3 +86,6 @@ _下划线_
 * treemac
 - SPC o p
 ** 关闭 q
+
+* elisp
+运行 C-x C-e
