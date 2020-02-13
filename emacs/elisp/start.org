@@ -144,3 +144,8 @@
 
 #+RESULTS:
 | Stephanie | Sasrah | Chloe | Mathilde |
+
+#+BEGIN_SRC emacs-lisp
+(dired "~/gtd")
+(open-dired-gtd)
+#+END_SRC

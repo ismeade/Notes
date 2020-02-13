@@ -17,6 +17,14 @@
 ** 缓冲区
 - 缓冲区列表 SPC b b
 - 上一个缓冲区 SPC b [
+** 工作区                                                 :工作区:workspace:
+工作区1的名字是main应该留作处理一切非项目的工作，例如 org-mode 等。
+- 新建工作区 SPC TAB n
+- 重命名当前工作区 SPC TAB r
+- 保存工作区 SPC TAB s
+- 切换工作区 SPC TAB . | SPC TAB 数字
+- 删除工作区 SPC TAB d
+- 重启 emacs 后需要使用 SPC TAB l 来加载工作区
 
 * org-mode
 
@@ -77,6 +85,9 @@ _下划线_
 
 * dired                                                                :Dird:
 - 打开 SPC o -
+- 打开文档 SPC .
+- 打开最近文档 SPC f r
+
 ** 创建
 *** 目录 +
 
@@ -88,4 +99,5 @@ _下划线_
 ** 关闭 q
 
 * elisp
-运行 C-x C-e
+- 运行 C-x C-e
+- 在org中的代码框中 C-c C-c 会自动哦生成RESULTS标签

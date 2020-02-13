@@ -1,0 +1,66 @@
+#+TITLE: commond
+
+
+* build
+#+BEGIN_SRC shell
+$docker build -t ismeade/debian:jessie
+#+END_SRC
+
+* login
+#+BEGIN_SRC shell
+$docker login
+#+END_SRC
+
+* tag
+#+BEGIN_SRC shell
+$docker tag ismeade/debian:jessie ismeade/debian:jessie
+#+END_SRC
+
+* push
+#+BEGIN_SRC shell
+$docker push ismeade/debian:jessie
+#+END_SRC
+
+* pull
+#+BEGIN_SRC shell
+$docker pull ismeade/debian:jessie
+#+END_SRC
+
+* images
+#+BEGIN_SRC shell
+$docker images
+#TAG=<none>
+$docker images -f/--filter "dangling=true"
+$docker rmi $(docker images -f "dangling=true" -q)
+#+END_SRC
+
+* run
+#+BEGIN_SRC shell
+$docker run -d ismeade/debian:jessie
+$docker run -ti --rm ismeade/debian:jessie /bin/bash
+#+END_SRC
+
+* ps
+#+BEGIN_SRC shell
+监控容器数量
+$docker ps -a -q | wc -l
+#正在运行的容器的数量
+$docker ps -q | wc -l
+#非运行状态的容器的数量
+$docker ps -a | grep -v 'Up '  | grep -v'CONTAINER' | wc -l
+
+#删除所有容器
+$docker rm -f `docker ps -a -q`
+#删除非运行的容器
+$docker rm `docker ps -a -q`
+#删除异常退出的容器
+$docker rm `docker ps -a | grep Exited | awk'{print $1}'`
+
+#删除docker无引用的镜像
+$docker rmi -f `docker images | grep'<none>' | awk '{print $3}'`
+#+END_SRC
+
+* exec
+#+BEGIN_SRC shell
+$docker exec -ti [containerId/containerName] /bin/bash
+#+END_SRC
