@@ -1,0 +1,107 @@
+#+TITLE: observer
+#+AUTHOR: liyang
+#+STARTUP: indent logdone
+#+OPTIONS: ^:{} toc:t H:5 num:0 todo:nil
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://samee-static.oss-cn-zhangjiakou.aliyuncs.com/css/YetAnotherGithub.css" />
+
+* 必要性
+观察者模式是oo设计中经常用到的模式之一，大家在解决实际需求时，观察者模式往往 都
+会用到，而javase中已经提供了Observer接口和Observable类让你简单快速的实现观 察者
+模式，因此有必要去了解Observer和Observable。
+
+* 概述
+** 角色
+- 被观察对象
+- 观察者
+** 关系
+- 被观察对象 : 观察者
+           1 : n
+- 被观察对象状态发生变化，会通知所有观察者，观察者将做出相应的反应
+** 详细说明
+参见《设计模式》观察者模式
+
+* 源码分析
+** Observer接口
+Observer为java.util包下的一个接口，源码如下:
+#+BEGIN_SRC java
+public interface Observer {
+    void update(Observable o, Object arg);
+}
+#+END_SRC
+该接口约定了观察者的行为。所有观察者需要在被观察对象发生变化时做出相应的反应，所
+做的具体反应就是实现Observer接口的update方法，实现update方法时你可以用到两个参数，
+一个参数的类型是Observable，另一个参数的类型是Object。当然如果完全由自己去实现一
+个观察者模式的方案，自己去设计Observer接口时，可能不会设计这两个参数。那为什么
+jdk设计该接口时规定接口中有这两个参数呢？那就是通用性。想想整个观察者模式有哪些
+类之间需要交互？使用该模式时牵扯三个类，一个是观察者，一个是被观察对象，一个是调
+用者(调用者可以是被观察对象本身调用，更多情况是一个具体的业务类)，当前接口代表观
+察者，要与被观察对象交互，因此update方法需要持有被观察对象(Observable)的引用，第
+一参数产生了；如何与调用者通信，则是添加了类型为Object的参数（该参数是调用者调用
+Observable实例的notifyObservers(Object obj)方法时传入的，当然也可以不传）；第一
+个参数可以说是为观察者提供了一种拉取数据的方式，update中的业务可以根据所需去拉去
+自己想要的被观察对象的信息(一般被观察对象中提供getter)，第二个参数则是由调用者调
+用notifyObservers(Object obj)将一些信息推过来。通过这两个参数，观察者，被观察对
+象，调用者(调用通知刷新方法的可能是被观察对象本身，此时只存在观察者与被观察者两
+者)三者就联系起来了。
+
+** Observable类
+Observable同样是java.util包下的接口（理所当然的事），该类的成员变量和方法如下:
+#+BEGIN_SRC java
+public class Observable {
+    private boolean changed = false;
+    private Vector<Observer> obs;
+    public Observable(){};
+    protected synchronized void setChanged(){};
+    protected synchronized void clearChanged(){};
+    public synchronized void addObserver(Observer o){};
+    public synchronized void deleteObserver(Observer o) {};
+    public synchronized void deleteObservers(){};
+    public synchronized boolean hasChanged(){};
+    public synchronized int countObservers(){};
+    public void notifyObservers(){};
+    public void notifyObservers(Object arg){};
+}
+#+END_SRC
+
+*** 先说成员变量：
+1. 该类中含有一个boolean型的变量changed，代表是否发生改变了，Observable类只提供
+   这个boolean值来表明是否发生变化，而不定义什么叫变化，因为每个业务中对变化的具
+   体定义不一样，因此子类自己来判断是否变化；该变量既提供了一种抽象(变与不变)，
+   同时提供了一种观察者更新状态的可延迟加载，通过后面的notifyObservers方法分析可
+   知观察者是否会调用update方法，依赖于changed变量，因此即使被观察者在逻辑上发生
+   改变了，只要不调用setChanged，update是不会被调用的。如果我们在某些业务场景不
+   需要频繁触发update，则可以适时调用setChanged方法来延迟刷新。
+
+2. 该类含有一个集合类Vector，该类泛型为Observer，主要用来存放所有观察自己的对象
+   的引用，以便在更新时可以挨个遍历集合中的观察者，逐个调用update方法 说明： 1.8
+   的jdk源码为Vector，有版本的源码是ArrayList的集合实现； Vector这个类和
+   ArrayList的继承体系是一致，主要有两点不同，一是Vector是线程安全的，ArrayList
+   不是线程安全的，Vector的操作依靠在方法上加了同步关键字来保证线程安全，与此同
+   时ArrayList的性能是要好于Vector的；二是Vector和ArrayList扩容阀值不太一样，
+   ArrayList较Vector更节省空间；
+
+*** 再来说说方法：
+1. 操作changed变量的方法为setChanged()，clearChanged()，hasChanged()；见名知意，
+   第一个设置变化状态，第二清除变化状态，这两个的访问权限都是protected，表明这两
+   个方法由子类去调用，由子类来告诉什么时候被观察者发生变化了，什么时候变化消失，
+   而hasChanged()方法的访问权限是公有的，调用者可以使用该方法。三个方法都有同步
+   关键字保证变量的读写操作线程安全。
+
+2. 操作Vector类型变量obs的方法为addObserver(Observer o)，
+   deleteObserver(Observer o)， deleteObservers()，countObservers()，这四个方法
+   分别实现了动态添加观察者，删除观察者，删除所有观察者，获取观察者数量。四个方
+   法的访问权限都是公有的，这是提供给调用者的方法，让调用者来实时动态的控制哪些
+   观察者来观察该被观察对象。
+
+3. 操作Vector型变量obs的四个方法都加有同步关键字，但是我们刚才分析成员属性Vector
+   obs这个变量时，说Vector类型为线程安全的，而上述四个方法为什么还要加同步关键字
+   呢，这是怎么回事？据我推测应该是程序员重构遗留问题吧，因为前面我说道，有历史
+   版本的源码是使用的ArrayList来持有Observer的引用，而ArrayList不是线程安全的，
+   所以上述四个操作结合的方法需要加上同步关键字来保证线程安全，而后来换成线程安
+   全的Vector了，但这四个操作集合的方法依旧保留了同步关键字。
+
+4. 两个对外的方法notifyObservers()，notifyObservers(Object arg)，该方法由调用者
+   来操作，用来通知所有的观察者需要做更新操作了。
+
+**
