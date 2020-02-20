@@ -5,4 +5,22 @@
 #+OPTIONS: html-style:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://samee-static.oss-cn-zhangjiakou.aliyuncs.com/css/YetAnotherGithub.css" />
 
-*
+* 策略、方法和方法论
+** 需要考虑的问题
+- 应用预期的吞吐量是多少
+- 请求和响应直接的延迟预期是多少
+- 应用支持多少并发用户或者并发任务
+- 当并发用户数或并发任务数达到最大时，可接受的吞吐量和延迟是多少
+- 最差情况下的延迟是多少
+- 要使垃圾收集引入的延迟在可容忍范围内，垃圾收集的频率应该是多少
+** 新能分析的两种方法
+- 自顶向下
+  操作系统、jvm、容器的监控
+- 自底向上
+  CPU架构、CPU数量、CPU使用率
+* 操作系统的性能监控
+** a
+** CPU使用率
+- 利用好系统分配的CPU周期
+- 对多核系统充分利用
+- 根据业务设计好处理模式
