@@ -101,3 +101,11 @@ _下划线_
 * elisp
 - 运行 C-x C-e
 - 在org中的代码框中 C-c C-c 会自动哦生成RESULTS标签
+
+* magit
+** 使用SPC g g 查看当前项目状态(类似git status)，在文件上按TAB可以看文件diff
+- s -> add 一个文件
+- u -> 取消add一个文件
+- c -> commit
+  - 填写提交信息后 C - c C - c
+- p 在commit记录上 push
