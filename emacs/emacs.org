@@ -25,11 +25,14 @@
 - 切换工作区 SPC TAB . | SPC TAB 数字
 - 删除工作区 SPC TAB d
 - 重启 emacs 后需要使用 SPC TAB l 来加载工作区
+** 格式化                                                    :format:indent:
+- 自动缩进当前文件 C-M-\
+  按法 C = ctrl M = alt
 
 * org-mode
 
 ** 头                                                                   :头:
-*** STARTUP indent 自动缩进    
+*** STARTUP indent 自动缩进
 *** STARTUP logdone 切换todo->done时自动加上时间
 
 ** 标题                                                               :标题:
@@ -87,6 +90,11 @@ _下划线_
 - 打开 SPC o -
 - 打开文档 SPC .
 - 打开最近文档 SPC f r
+- 标记文件 m
+- 取消标记 u
+- 取消全部标记 U
+- 文件重命名 R
+- 复制文件 C
 
 ** 创建
 *** 目录 +
@@ -98,11 +106,11 @@ _下划线_
 - SPC o p
 ** 关闭 q
 
-* elisp
+* elisp                                                               :elisp:
 - 运行 C-x C-e
 - 在org中的代码框中 C-c C-c 会自动哦生成RESULTS标签
 
-* magit
+* magit                                                               :magit:
 ** 使用SPC g g 查看当前项目状态(类似git status)，在文件上按TAB可以看文件diff
 - s -> add 一个文件
 - u -> 取消add一个文件

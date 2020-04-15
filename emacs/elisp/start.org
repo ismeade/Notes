@@ -120,7 +120,7 @@
 #+END_SRC
 
 #+RESULTS:
-: liyang
+: liy
 
 #+BEGIN_SRC emacs-lisp
 (defun greeting ()
