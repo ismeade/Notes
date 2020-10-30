@@ -45,7 +45,7 @@ or
 # 不使用-m会弹出文本编辑器
 $git commit
 
-# 提交信息怎么办
+# 提交信息输错了
 $git commit --amend
 ```
 
@@ -163,7 +163,6 @@ $git stash save
 $git stash pop
 
 ```
-
 
 # 资料
 [reset](https://www.jianshu.com/p/c2ec5f06cf1a)
