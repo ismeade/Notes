@@ -163,6 +163,3 @@ $git stash save
 $git stash pop
 
 ```
-
-# 资料
-[reset](https://www.jianshu.com/p/c2ec5f06cf1a)
